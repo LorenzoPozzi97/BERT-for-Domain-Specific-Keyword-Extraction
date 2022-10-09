@@ -1,2 +1,2 @@
 # BERT-for-Domain-specofic-Keyword-Extraction
-This project aimed to use the BERT model ofr the task of extraction keywords in a domain-specific scenarion. More specifically, a custom dataset will be used to identify statistical terms in a corpus generated from academic textbooks.
+This project make use of the BERT model for the task of extracting keywords in a domain-specific scenario. More specifically, a custom dataset will be used to identify statistical terms in a corpus generated from 8 academic textbooks.

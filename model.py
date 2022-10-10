@@ -1,5 +1,3 @@
-from transformers import BertModel, BertTokenizer,  BertConfig, DistilBertModel, DistilBertConfig
-
 class BertLstm(nn.Module):
     def __init__(self, config, doLSTM = 'on'):
       super(BertLstm, self).__init__()

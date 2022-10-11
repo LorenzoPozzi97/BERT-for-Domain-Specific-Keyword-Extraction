@@ -39,7 +39,7 @@ def train(model, optimizer, criterion, train_data, train_labels, test_data, test
       train_input_type = train_data[i]['token_type_ids'].to(device)              # (batch, max_seq_length)
       token_train_label = train_labels['Tags'][i].to(device)                     # (batch, max_seq_length)
     
-      output, pooled_output = model(train_input_ids.long(), 
+      output = model(train_input_ids.long(), 
                                     attention_mask = train_input_mask.long(), 
                                     token_type_ids = train_input_type.long())    # (batch, max_seq_length, 1)
   
@@ -79,7 +79,7 @@ def train(model, optimizer, criterion, train_data, train_labels, test_data, test
       
       with torch.no_grad():   
         
-        output, _ = model(test_input_ids.long(), 
+        output = model(test_input_ids.long(), 
                           attention_mask = test_input_mask.long(), 
                           token_type_ids = test_input_type.long())               # (batch, max_seq_length, 1)
 

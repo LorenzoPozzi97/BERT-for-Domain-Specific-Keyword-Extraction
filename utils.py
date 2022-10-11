@@ -1,3 +1,6 @@
+def set_seed(seed = CONFIG.seed):
+    torch.manual_seed(seed)
+
 def dataBatcher(df, BATCH_SIZE):
   rows = []
   for i in range(BATCH_SIZE, len(df), BATCH_SIZE): # skip the first iteration

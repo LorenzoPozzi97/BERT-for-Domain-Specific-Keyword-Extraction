@@ -31,7 +31,6 @@ def dataBatcher(df, BATCH_SIZE):
       type_zeros = torch.zeros(sentences.iloc[x].size()[0]) if sentences.iloc[x].size()[0]!=512 else torch.zeros(sentences.iloc[x].size()[0]-(head.iloc[x].size()[0]+1))
       type_ones = torch.ones(head.iloc[x].size()[0]+1 + (max_length_batch - s.size()[0]))
       if torch.cat((type_zeros, type_ones), 0).size()[0]>512:
-        print('here', i)
         type_ones = type_ones[:512-torch.cat((type_zeros, type_ones), 0).size()[0]]
       token_type_ids.append(torch.cat((type_zeros, type_ones), 0).unsqueeze(0))
 
@@ -42,7 +41,6 @@ def dataBatcher(df, BATCH_SIZE):
       label_zeros = torch.zeros(max_length_batch - tags.iloc[x].size()[0])
       labels.append(torch.cat((tags.iloc[x], label_zeros), 0).unsqueeze(0))
   
-    #print('Store the values...')
 
     # create batch (batch, dim)
     input_ids = torch.cat(input_ids, 0)

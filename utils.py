@@ -114,3 +114,88 @@ def dataBatcher(df, BATCH_SIZE):
 
   batch_df = pd.DataFrame(rows, columns=["Sentence", "Tags", "Relevance"])
   return batch_df
+
+
+def stemList(to_stem):
+  stemmed = []
+  for phrase in to_stem:
+    tokenAux=""
+    textAux=""
+    tokens = nltk.wordpunct_tokenize(phrase)
+    for token in tokens:
+      tokenAux = token
+      tokenAux = PorterStemmer().stem(token)    
+      textAux = textAux + " " + tokenAux
+    stemmed.append(textAux)
+  return(stemmed)
+
+def singleRetriever(binary_vector, input_id):
+  # x keep track of the previous iteration
+  previous_iteration = 0
+  retrieved = []
+  for i, binary_value in enumerate(binary_vector):
+    
+    # if there is a relevant term in the prediction
+    if binary_value ==1:
+      # convert ids to tokens from the original BERT tokens
+      # unsqueeze(0) because can't be 0-d
+      token = CONFIG.tk.convert_ids_to_tokens(input_id[i].unsqueeze(0))
+      
+      # reconstruct split tokens
+      if len(retrieved)>0 and i == previous_iteration+1 and token[0].startswith('##'):
+        retrieved[-1] += token[0][2:]
+      # join togetehr subsequent tokens to form a unique keyword
+      elif len(retrieved)>0 and i == previous_iteration+1 and not token[0].startswith('##'):
+        retrieved[-1] += ' ' + token[0].lower()
+      else:
+        retrieved.append(token[0].lower())
+      previous_iteration = i
+  
+  return sorted(list(set(retrieved)))
+
+
+def non_increasing(L):
+    return all(x>=y for x, y in zip(L, L[1:]))
+
+def non_decreasing(L):
+    return all(x<=y for x, y in zip(L, L[1:]))
+
+def monotonic(L):
+    return non_increasing(L) or non_decreasing(L)
+
+def format_time(elapsed):
+    '''
+    Takes a time in seconds and returns a string hh:mm:ss
+    '''
+    # Round to the nearest second.
+    elapsed_rounded = int(round((elapsed)))
+    
+    # Format as hh:mm:ss
+    return str(datetime.timedelta(seconds=elapsed_rounded))
+
+def retriever(prediction, target, toke_type_ids, input_ids, val = False):
+  retrieved, to_retreive = [], []
+
+  prediction = prediction.squeeze()
+  target = target.squeeze()                                                      # (batch, max_seq_length)
+                                                      
+  # iterate through batches
+  for i in range(prediction.size()[0]):
+    single_pred = prediction[i].squeeze()                                            # (max_seq_length)
+    single_targ = target[i].squeeze()                                            # (max_seq_length)
+    if not any(single_pred) and not any(single_targ):
+      # if there are no 1s in prediction and ground-proof skip iteration
+      continue   
+
+    # remuve heads, [CLS]s, and [PAD]s
+    until_here = single_pred.size()[-1] - torch.count_nonzero(toke_type_ids[i])-1
+    single_pred = single_pred[1:until_here]                                      # (real_length)
+    #single_targ = single_targ[1:until_here]                                      # (real_length)
+    input_id = input_ids[i][1:until_here]                                        # (real_length)
+    binary_single_pred = torch.where(single_pred > CONFIG.threshold, 1, 0)
+    a = singleRetriever(binary_single_pred, input_id)
+    retrieved.extend(a)
+    # x keep track of the previous iteration
+  
+  retrieved = sorted(list(set(retrieved)))
+  return retrieved, _

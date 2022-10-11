@@ -1,20 +1,20 @@
 with open('.../A_Concise_Guide_to_Statistics.csv', 'rb') as data:
      df1 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/A_modern_introduction_to_probability.csv', 'rb') as data:
+with open('.../A_modern_introduction_to_probability.csv', 'rb') as data:
      df2 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/Modern_Mathematical_Statistics_With_Applications.csv', 'rb') as data:
+with open('.../Modern_Mathematical_Statistics_With_Applications.csv', 'rb') as data:
      df3 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/Openintro_Statistics.csv', 'rb') as data:
+with open('.../Openintro_Statistics.csv', 'rb') as data:
      df4 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/Statistics_and_Probability_Theory.csv', 'rb') as data:
+with open('.../Statistics_and_Probability_Theory.csv', 'rb') as data:
      df5 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/Statistics_for_Non_Statisticians.csv', 'rb') as data:
+with open('...Statistics_for_Non_Statisticians.csv', 'rb') as data:
      df6 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/Probability_and_statistics_for_engineers_and_scientists.csv', 'rb') as data:
+with open('...Probability_and_statistics_for_engineers_and_scientists.csv', 'rb') as data:
      df7 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/Statistics_for_Scientists_and_Engineers.csv', 'rb') as data:
+with open('...Statistics_for_Scientists_and_Engineers.csv', 'rb') as data:
      df8 = csv.reader(data)
-with open('/content/drive/MyDrive/University/Thesis Project/CVSbooks/Common Tags/Introductory_Statistics_With_R.csv', 'rb') as data:
+with open('...Introductory_Statistics_With_R.csv', 'rb') as data:
      df9 = csv.reader(data)
     
 # add datasets in the train and test lists

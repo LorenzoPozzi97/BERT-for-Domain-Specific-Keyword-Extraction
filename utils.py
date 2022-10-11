@@ -1,12 +1,12 @@
-def dataBatcher(df, CONFIG.train_batch):
+def dataBatcher(df, BATCH_SIZE):
   rows = []
-  for i in range(CONFIG.train_batch, len(df), CONFIG.train_batch): # skip the first iteration
+  for i in range(BATCH_SIZE, len(df), BATCH_SIZE): # skip the first iteration
     input_ids, attention_mask, token_type_ids, labels = [], [], [], []
 
-    sentences = df['Enc Sentence'].iloc[i-CONFIG.train_batch:i]
-    tags = df['Enc Tags'].iloc[i-CONFIG.train_batch:i]
-    relevance = df['Relevance'].iloc[i-CONFIG.train_batch:i]
-    head = df['Enc Heading'].iloc[i-CONFIG.train_batch:i]
+    sentences = df['Enc Sentence'].iloc[i-BATCH_SIZE:i]
+    tags = df['Enc Tags'].iloc[i-BATCH_SIZE:i]
+    relevance = df['Relevance'].iloc[i-BATCH_SIZE:i]
+    head = df['Enc Heading'].iloc[i-BATCH_SIZE:i]
     
     max_length_batch = max([torch.cat((s, head.iloc[i], torch.tensor([102])), 0).size()[0] for i, s in enumerate(sentences)]) 
     max_length_batch = 512 if max_length_batch>512 else max_length_batch
@@ -60,7 +60,7 @@ def dataBatcher(df, CONFIG.train_batch):
   
     rows.append([batch_dict, labels, relevance])
 
-    if i+CONFIG.train_batch > len(df):
+    if i+BATCH_SIZE > len(df):
       input_ids, attention_mask, token_type_ids, labels = [], [], [], []
     
       sentences = df['Enc Sentence'].iloc[i:]

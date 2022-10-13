@@ -22,3 +22,9 @@ Snippet of the Dataset:
 <img src="https://github.com/LorenzoPozzi97/BERT-for-Domain-Specific-Keyword-Extraction/blob/8382a41dba8989787c1d61ad26ad5c817267fc0c/Dataset%20Snippet.png" alt="drawing" width="500"/>
 
 ## Keyword Extraction Model
+The model used consist of:
+- BERT encoder
+- Bidirectional LSTM
+- Linear Classifier
+
+<img src="https://github.com/LorenzoPozzi97/BERT-for-Domain-Specific-Keyword-Extraction/blob/537533512f55b73aa9203380cd1fac66bb8e6835/model.png" alt="drawing" width="600"/>

@@ -7,3 +7,5 @@ In this project the BERT model was used for the task of extracting keywords in a
 - ~800 different keywords
 - ~24˙100 paragraphs
 
+Dataset Snippet.png
+

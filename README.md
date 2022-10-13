@@ -27,4 +27,4 @@ The model used consist of:
 - Bidirectional LSTM
 - Linear Classifier
 
-<img src="https://github.com/LorenzoPozzi97/BERT-for-Domain-Specific-Keyword-Extraction/blob/537533512f55b73aa9203380cd1fac66bb8e6835/images/model.png" alt="drawing" width="600"/>
+<img src="https://github.com/LorenzoPozzi97/BERT-for-Domain-Specific-Keyword-Extraction/blob/a7a03a0fc03d73bf011068d6ef0e37a867441617/images/model.png" alt="drawing" width="600"/>
